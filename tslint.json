@@ -9,11 +9,19 @@
     ]
   },
   "rules": {
-    "quotemark": [true, "single"],
+    "only-arrow-functions": false,
+    "semicolon": false,
+    "comment": false,
+    "no-console": false,
+    "trailing-comma": false,
+    "quotemark": [false, "single"],
     "indent": [true, "spaces", 2],
     "interface-name": false,
     "ordered-imports": false,
     "object-literal-sort-keys": false,
     "no-consecutive-blank-lines": false
+  },
+  "jsRules": {
+    "no-console": false
   }
 }

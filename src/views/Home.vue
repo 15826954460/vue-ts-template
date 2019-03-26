@@ -1,18 +1,100 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    {{name}}
+    <p v-html="getName()"></p>
+    <button @click="add">点我试试</button>
+    {{count}} {{addCount}}
+    <div>自定义指令 ： {{modelData | capitalize}}</div>
+    <br>
+    <HelloWorld :state="state" @stateValue="stateValue"/>
+    <br>
+    <button @click="vuexAdd">vuex store add</button>
+    {{stateTestCount}}
+    <br>
+    <button @click="vuexModuleAdd">module add</button>
+    {{someModuleNumber}}
+    <br>
+    <br>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import { Component, Vue, Watch } from "vue-property-decorator";
+import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import { namespace, Action, Getter, Mutation, State } from "vuex-class";
+
+const homeModule = namespace("home");
+import { capitalize } from "@/filter/index";
 
 @Component({
-  components: {
-    HelloWorld,
-  },
+  components: { HelloWorld },
+  filters: { capitalize } // 自定义指令
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  @State("testCount") public stateTestCount: any;
+  @Action("ac_add") public actionAdd: any;
+  @homeModule.State("number") public someModuleNumber: any;
+  @homeModule.Action("ac_addNumber") public someModuleAddNumber: any;
+  public state: boolean = false;
+  // 私有属性类型声明，私有属性无法向子组件传递
+  private name: string;
+  private count: number;
+  private modelData: string;
+  constructor() {
+    super();
+    this.name = "xiaoli";
+    this.count = 666;
+    this.modelData = "filter.js test";
+  }
+  // 生命周期钩子函数的使用
+  public created(): void {
+    console.log("created");
+  }
+
+  public mounted(): void {
+    console.log(process.env.BASE_URL)
+    console.log(this.stateTestCount);
+  }
+
+  // 定义方法
+  public getName() {
+    return this.name + "hollo typescript";
+  }
+  public add(): void {
+    this.count += 1;
+  }
+
+  public stateValue(value: boolean): void {
+    this.state = value;
+  }
+
+  public welcome(): void {
+    console.log("welcome to emit");
+  }
+
+  public vuexAdd(): void {
+    this.actionAdd();
+  }
+
+  public vuexModuleAdd(): void {
+    this.someModuleAddNumber();
+  }
+
+  // watch 监听器
+  @Watch("count", { immediate: true, deep: true })
+  public onChildChanged(val: string, oldVal: string) {
+    console.log("watch new count${val}");
+  }
+
+  // 计算属性
+  public get addCount() {
+    return this.count * 10;
+  }
+}
 </script>
+<style>
+.home {
+  border: 1px solid red;
+}
+</style>
+
