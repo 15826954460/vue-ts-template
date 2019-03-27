@@ -1,10 +1,12 @@
 <template>
   <div class="hello">
-    <h1>{{ state }}</h1>
-    <button @click="close">修改</button>
-    <br>
+    <p>
+      <button @click="close">修改状态</button>
+      <span>{{ state }}</span>
+    </p>
+
     <button @click="addToCount">addToCount</button>
-    <p>{{count}}</p>
+    {{count}}
     <button @click="resetCount">resetCount</button>
   </div>
 </template>
@@ -12,7 +14,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from "vue-property-decorator";
 
-@Component
+@Component // 装饰器语法参照 https://www.npmjs.com/package/vue-property-decorator
 export default class HelloWorld extends Vue {
   @Prop() public state: any; // 子组件接收过来的值
   private count: number;
@@ -39,18 +41,4 @@ export default class HelloWorld extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>

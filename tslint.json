@@ -9,6 +9,7 @@
     ]
   },
   "rules": {
+    "no-trailing-whitespace": false,
     "only-arrow-functions": false,
     "semicolon": false,
     "comment": false,
