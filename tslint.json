@@ -9,6 +9,8 @@
     ]
   },
   "rules": {
+    "arrow-parens": false,
+    "object-literal-shorthand": false,
     "no-trailing-whitespace": false,
     "only-arrow-functions": false,
     "semicolon": false,
