@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    全局组建：<BtnCom/>
+    
     <p>变量的引用：{{name}}</p>
     <p v-html="getName()"></p>
 

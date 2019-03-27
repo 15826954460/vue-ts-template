@@ -16,6 +16,7 @@
     "vuex-class": "^0.3.2"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.123",
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-typescript": "^3.5.0",
     "@vue/cli-service": "^3.5.0",
