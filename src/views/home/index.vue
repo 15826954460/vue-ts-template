@@ -17,6 +17,8 @@
 
     <p>组建通信：</p>
     <HelloWorld :state="state" @stateValue="stateValue"/>
+
+    <p>国际化: <span>{{$t("international")}}</span></p>
   </div>
 </template>
 
